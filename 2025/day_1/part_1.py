@@ -10,12 +10,7 @@ def update_state(code):
     direction = 1
     if letter == 'L':
         direction = -1
-    s = state + (direction * step)
-    while s < 0:
-        s += 100
-    if s > 99:
-        s %= 100
-    state = s
+    state = (state + (direction * step)) % 100
 
 def update_counter():
     global state
@@ -26,7 +21,7 @@ def update_counter():
 def main():
     with open('input.txt', 'r') as input:
         for code in input:
-            update_state(code)
+            update_state(code.strip())
             update_counter()
     print(f'Password: {counter}')
 
